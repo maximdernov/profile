@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Матрица ответственности и полномочий</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        #searchInput {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Матрица ответственности и полномочий</h1>
+    <input type="text" id="searchInput" placeholder="Поиск...">
+    <table id="matrix">
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Ответственность</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Имя 1</td>
+                <td>Ответственность 1</td>
+                <td><button onclick="deleteRow(this)">Удалить</button></td>
+            </tr>
+            <!-- Additional rows will be added here -->
+        </tbody>
+    </table>
+    <button onclick="addRow()">Добавить строку</button>
+
+    <script>
+        function addRow() {
+            const table = document.getElementById("matrix").getElementsByTagName("tbody")[0];
+            const newRow = table.insertRow();
+            const nameCell = newRow.insertCell(0);
+            const responsibilityCell = newRow.insertCell(1);
+            const actionCell = newRow.insertCell(2);
+            
+            nameCell.contentEditable = true;
+            responsibilityCell.contentEditable = true;
+            actionCell.innerHTML = '<button onclick="deleteRow(this)">Удалить</button>';
+        }
+
+        function deleteRow(button) {
+            const row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+
+        document.getElementById('searchInput').addEventListener('keyup', function() {
+            const filter = this.value.toLowerCase();
+            const rows = document.querySelectorAll("#matrix tbody tr");
+            rows.forEach(row => {
+                const cells = row.getElementsByTagName("td");
+                const shouldDisplay = Array.from(cells).some(cell => cell.textContent.toLowerCase().includes(filter));
+                row.style.display = shouldDisplay ? "" : "none";
+            });
+        });
+    </script>
+</body>
+</html>
