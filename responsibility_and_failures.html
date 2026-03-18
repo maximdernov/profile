@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsibility Matrix and System Failures</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .tabs { display: flex; cursor: pointer; }
+        .tab { padding: 10px; border: 1px solid #ccc; border-bottom: none; background: #f1f1f1; }
+        .tab-content { border: 1px solid #ccc; padding: 10px; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <h1>Responsibility Matrix and System Failures</h1>
+    <div class="tabs">
+        <div class="tab" onclick="showTab('matrix')">Matrix of Responsibility</div>
+        <div class="tab" onclick="showTab('failures')">System Failures Registry</div>
+    </div>
+    <div id="matrix" class="tab-content hidden">
+        <h2>Matrix of Responsibility</h2>
+        <table>
+            <tr><th>Responsibility</th><th>Name</th></tr>
+            <!-- Matrix data will be inserted here -->
+        </table>
+    </div>
+    <div id="failures" class="tab-content hidden">
+        <h2>System Failures Registry</h2>
+        <table>
+            <tr><th>Failure ID</th><th>Description</th><th>Date</th></tr>
+            <!-- Failures data will be inserted here -->
+        </table>
+    </div>
+    <script>
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+            document.getElementById(tabName).classList.remove('hidden');
+        }
+        // Default to showing the matrix tab
+        showTab('matrix');
+    </script>
+</body>
+</html>
