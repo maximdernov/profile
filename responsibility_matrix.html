@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsibility Matrix and System Failures Registry</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
+        th { background-color: #f2f2f2; position: sticky; top: 0; }
+        .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); }
+        .modal-content { background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; }
+    </style>
+</head>
+<body>
+    <h1>Responsibility Matrix</h1>
+    <table id="responsibility-matrix">
+        <thead>
+            <tr>
+                <th>Task ID</th>
+                <th>Task Description</th>
+                <th>Responsible</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Sample Tasks -->
+            {{#each tasks}}
+            <tr>
+                <td>{{this.id}}</td>
+                <td>{{this.description}}</td>
+                <td>{{this.responsible}}</td>
+                <td>
+                    <button onclick="editTask('{{this.id}}')">Edit</button>
+                    <button onclick="deleteTask('{{this.id}}')">Delete</button>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <h1>System Failures Registry</h1>
+    <table id="failures-registry">
+        <thead>
+            <tr>
+                <th>Failure ID</th>
+                <th>Description</th>
+                <th>Reported By</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Sample Failures -->
+            {{#each failures}}
+            <tr>
+                <td>{{this.id}}</td>
+                <td>{{this.description}}</td>
+                <td>{{this.reportedBy}}</td>
+                <td>
+                    <button onclick="editFailure('{{this.id}}')">Edit</button>
+                    <button onclick="deleteFailure('{{this.id}}')">Delete</button>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <script>
+        const tasks = Array.from({length: 47}, (_, i) => ({
+            id: i + 1,
+            description: `Task description ${i + 1}`,
+            responsible: `User ${Math.floor(Math.random() * 5) + 1}`
+        }));
+
+        const failures = Array.from({length: 4}, (_, i) => ({
+            id: i + 1,
+            description: `Failure description ${i + 1}`,
+            reportedBy: `User ${Math.floor(Math.random() * 5) + 1}`
+        }));
+
+        function editTask(taskId) {
+            alert('Editing Task: ' + taskId);
+            // Open modal for editing
+        }
+
+        function deleteTask(taskId) {
+            alert('Deleting Task: ' + taskId);
+            // Implement delete logic
+        }
+
+        function editFailure(failureId) {
+            alert('Editing Failure: ' + failureId);
+            // Open modal for editing
+        }
+
+        function deleteFailure(failureId) {
+            alert('Deleting Failure: ' + failureId);
+            // Implement delete logic
+        }
+
+        // Additional functionalities like search, export, etc.
+    </script>
+</body>
+</html>
