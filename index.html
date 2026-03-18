@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Sheets Data Search</title>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script>
+        function init() {
+            gapi.load('client', function() {
+                gapi.client.init({
+                    apiKey: 'YOUR_API_KEY_HERE',
+                }).then(loadData);
+            });
+        }
+
+        function loadData() {
+            gapi.client.sheets.spreadsheets.values.get({
+                spreadsheetId: '1MlToUDo6M7xdqNLyxzOvcoLji0PjOlnhSrZYR9zu660',
+                range: 'Sheet1',
+            }).then(function(response) {
+                const data = response.result.values;
+                displayData(data);
+            }, function(error) {
+                console.error('Error fetching data: ', error);
+            });
+        }
+
+        function displayData(data) {
+            const output = document.getElementById('output');
+            output.innerHTML = '';
+            data.forEach(row => {
+                output.innerHTML += row.join(', ') + '<br>';
+            });
+        }
+    </script>
+</head>
+<body onload="init()">
+    <h1>Google Sheets Data Search Application</h1>
+    <div id="output"></div>
+</body>
+</html>
